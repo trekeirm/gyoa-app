@@ -29,10 +29,8 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 
 /**
- * A window that takes over the full screen.  You can put exactly one
- * JComponent into the window.  If there are multiple screens attached
- * to the computer, this class will display buttons on each screen so
- * that the user can select which one receives the full-screen window.
+ * A window that takes over the full screen. You can put exactly one
+ * JComponent into the window. 
  */
 public class FullScreenWindow {
    
@@ -43,9 +41,7 @@ public class FullScreenWindow {
     private JFrame frame;
 
     /**
-     * Create a full screen window containing a JComponent.  The user
-     * will only be asked which screen to display on if there are multiple
-     * monitors attached and the user hasn't already made a choice.
+     * Create a full screen window displaying a JComponent. 
      * @param part the JComponent to display
      */
     public FullScreenWindow(JComponent part) {
@@ -53,7 +49,7 @@ public class FullScreenWindow {
     }
 
     /**
-     * Close the full screen window.  This particular FullScreenWindow
+     * Close the full screen window. This particular FullScreenWindow
      * object cannot be used again.
      */
     public void close() {
@@ -70,7 +66,7 @@ public class FullScreenWindow {
     private void init(JComponent part) {
 		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 		screen = ge.getScreenDevices()[0];
-		GraphicsConfiguration gc= screen.getDefaultConfiguration();
+		GraphicsConfiguration gc = screen.getDefaultConfiguration();
 		frame = new JFrame(gc);
 		frame.setUndecorated(true);
 		frame.setBounds(gc.getBounds());
@@ -78,5 +74,8 @@ public class FullScreenWindow {
 		frame.setVisible(true);
 		screen.setFullScreenWindow(frame);
     }
- 
+
+	public JFrame getFrame() {
+		return frame;
+	}
 }
