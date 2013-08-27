@@ -32,7 +32,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileFilter;
 
 /**
- * Create an Your Own Adventure app based on Sun's original PDF Viewer.
+ * Create Your Own Adventure app based on Sun's original PDF Viewer.
  */
 @SuppressWarnings("serial")
 public class PDFViewer extends JFrame implements KeyListener {
@@ -54,9 +54,7 @@ public class PDFViewer extends JFrame implements KeyListener {
     Deque<Integer> storyPath = new ArrayDeque<Integer>();
 
     /**
-     * Create a new PDFViewer based on a user, with or without a thumbnail
-     * panel.
-     * @param useThumbs true if the thumb panel should exist, false if not.
+     * Create a new PDFViewer 
      */
     public PDFViewer(boolean useThumbs) {
         super(TITLE);
@@ -110,7 +108,7 @@ public class PDFViewer extends JFrame implements KeyListener {
     }
 
     /**
-     * Changes the displayed page.
+     * Changes the displayed page in the PDF.
      * @param pagenum the page to display
      */
     public void gotoPage(int pagenum) {
