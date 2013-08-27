@@ -23,13 +23,11 @@ import java.util.logging.Logger;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
-import javax.swing.JComponent;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
-import javax.swing.KeyStroke;
 import javax.swing.SwingUtilities;
 import javax.swing.filechooser.FileFilter;
 
@@ -76,7 +74,6 @@ public class PDFViewer extends JFrame implements KeyListener {
     protected void init() {
         page = new PagePanel();
         page.addKeyListener(this);
-        getRootPane().registerKeyboardAction(fullScreenAction, KeyStroke.getKeyStroke("F"), JComponent.WHEN_IN_FOCUSED_WINDOW);
         getContentPane().add(page, BorderLayout.CENTER);
         JMenuBar mb = new JMenuBar();
         JMenu file = new JMenu("File");
@@ -207,7 +204,7 @@ public class PDFViewer extends JFrame implements KeyListener {
             return "Choose a PDF file";
         }
     };
-    private File prevDirChoice;
+    private File prevDirChoice = new File("ycnij");
 
     /**
      * Ask the user for a PDF file to open from the local file system
@@ -292,6 +289,8 @@ public class PDFViewer extends JFrame implements KeyListener {
     	if (branchFile.exists()) {
     		String[] pageOptions = readBranchOptions(branchFile);
     		boolean tempSwitch = false;
+    		// In full screen mode we cannot display JOptionPanes (since they are windows).
+    		// As a workaround we temporarily disable full screen mode.
     		if (fullScreen != null) {
     			setFullScreenMode(false);
     			tempSwitch = true;
@@ -426,6 +425,14 @@ public class PDFViewer extends JFrame implements KeyListener {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
+        } else if (code == KeyEvent.VK_P) {
+        	try {
+        		doPrevDocument();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+        } else if (code == KeyEvent.VK_F) {
+        	doFullScreen();
         } else if (code == KeyEvent.VK_ESCAPE) {
             setFullScreenMode(false);
         }
